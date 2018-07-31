@@ -127,7 +127,6 @@ class AudioEmitterThread(QtCore.QThread):
 		duration = 1.0   # in seconds, may be float
 		f = 1000.0        # sine frequency, Hz, may be float
 		samples = (np.sin(2*np.pi*np.arange(fs*duration)*f/fs)).astype(np.float32)
-
 		sd.play(samples, self.fs)
 		fs = None
 		self.stop()

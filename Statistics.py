@@ -22,6 +22,7 @@ class Statistics(QtCore.QTimer):
 	def PrintStats(self):
 		pass
 		#print("Network Read loops: ", self.SharedData.loopcounter[0])
+		#print( "SharedData size: ", sys.getsizeof(self.SharedData) )
 		# fps
 		# buffers
 		# timeStart timeEnd

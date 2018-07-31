@@ -6,24 +6,13 @@ __version__ = "0.3"
 __license__ = "GPL"
 
 import sys, os, platform, time, requests
-from queue import Queue
 from random import seed
 seed(12345)
+
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from multiprocessing import freeze_support, Queue, Process, Pool, cpu_count
 
-#from PIL import ImageGrab, Image, ImageTk
-#import cv2
-import numpy as np
-from PyQt5 import QtCore, QtGui, QtWidgets, uic
-
 from configuration import config, ConfigRead
-from NetworkingThread import ThreadDispatcher
-from FrameProcessorThread import FrameProcessor
-from AudioRecordThread import AudioRecorderThread
-from OpenCVTools import OpenCVTools
-from VideoRecorderThread import VideoRecorder
-from GifEmitterThread import GifExporter, GifEmitterThread
-from Statistics import Statistics
 
 from ipcam_tool import MyWindowClass
 

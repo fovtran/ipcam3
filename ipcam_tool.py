@@ -36,7 +36,8 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 		self.mydev = myaudiodev
 		self.SharedData = SharedData(parent)
 		self.cvtools = OpenCVTools(parent)
-
+		self.qimage = None
+		self.cvimage = None
 		self.config = ConfigRead('config.ini', parent=parent)
 		self.config.Reader()
 		self.my_video_source = None
@@ -71,7 +72,7 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 		print("Network Reader ready")
 
 		self.stats = Statistics(self.SharedData)
-		self.stats.start(1000)
+		self.stats.start(5000)
 
 	def extra_filtering(self, s):
 		if self.checkBox.isChecked():
@@ -130,7 +131,7 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 	@QtCore.pyqtSlot()
 	def imgWidgetClicked(self):
 		self.thumbnail_counter()
-		#print("Event: ", evt)
+		print("Event: ", evt)
 		self.SharedData.timer1.start()
 		self.source = 'ipcam'
 		store = self.update_other(self.thumb_ctx, self.SharedData.videoframe)
@@ -147,17 +148,15 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 	@QtCore.pyqtSlot(object)
 	def update_frame(self, current_frame):
 		self.config.image_counter +=1
-		#self.config.last_files = str([self.config.last_files] + [full_image_path])
-		self.SharedData.videoframe = current_frame
-		img_height, img_width, img_colors = self.SharedData.videoframe.shape
+		img_height, img_width, img_colors = current_frame.shape
 		scale_w = np.float(self.window_width) / np.float(img_width)
 		scale_h = np.float(self.window_height) / np.float(img_height)
 		scale = np.min([scale_w, scale_h])
-		self.SharedData.img = self.cvtools.cvresize(self.SharedData.videoframe, scale)
-		self.ImageObjects[0].setStream(self.SharedData.videoframe)
-		self.SharedData.height, self.SharedData.width, bpc = self.SharedData.img.shape
-		self.SharedData.qimage = QtGui.QImage(self.SharedData.img.data, self.SharedData.width, self.SharedData.height, bpc * self.SharedData.width, QtGui.QImage.Format_RGB888)
-		self.ImageObjects[0].setImage(self.SharedData.qimage, self.SharedData.recording, self.SharedData.IsStream, self.config.image_counter)
+		self.cvimage = self.cvtools.cvresize(current_frame, scale)
+		#self.ImageObjects[0].setStream(current_frame)
+		self.SharedData.height, self.SharedData.width, bpc = self.cvimage.shape
+		self.qimage = QtGui.QImage(self.cvimage.data, self.SharedData.width, self.SharedData.height, bpc * self.SharedData.width, QtGui.QImage.Format_RGB888)
+		self.ImageObjects[0].setImage(self.qimage, self.SharedData.recording, self.SharedData.IsStream, self.config.image_counter)
 
 	def closeEvent(self, event):
 		self.config.Writer()

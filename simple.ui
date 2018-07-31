@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>884</width>
-    <height>661</height>
+    <width>667</width>
+    <height>633</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -302,11 +302,24 @@
    <widget class="QSpinBox" name="delay">
     <property name="geometry">
      <rect>
-      <x>460</x>
+      <x>482</x>
       <y>0</y>
-      <width>53</width>
+      <width>31</width>
       <height>33</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>70</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>
@@ -315,8 +328,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>884</width>
-     <height>38</height>
+     <width>667</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

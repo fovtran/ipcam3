@@ -28,9 +28,9 @@ class ThreadDispatcher(QtCore.QThread):
 	def run(self):
 		s = requests.Session()
 		try:
-			print("Starting stream")
+			print("Streaming client start")
 			self.stream = s.get(self.SharedData.stream_URI, stream=True, timeout=10.001)
-			print("Stream OK")
+			print("Stream Connected")
 		except:
 			print("Stopping stream")
 			self.errors()
