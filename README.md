@@ -39,15 +39,12 @@ Edit config.xml for ipcam target ip address
 Usage
 -----
 
-Basic form:
-
 ```Windows
 Execute Run.bat
+```
 
 ```Other
 Python ipcam.py
-
-GitHub::Markup.render('README.markdown', "* One\n* Two")
 ```
 
 Troubleshooting

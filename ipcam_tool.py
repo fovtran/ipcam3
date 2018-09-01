@@ -148,13 +148,16 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 	@QtCore.pyqtSlot(object)
 	def update_frame(self, current_frame):
 		self.config.image_counter +=1
+		# USAR NUMPY VECTORIZE
 		img_height, img_width, img_colors = current_frame.shape
 		scale_w = np.float(self.window_width) / np.float(img_width)
 		scale_h = np.float(self.window_height) / np.float(img_height)
 		scale = np.min([scale_w, scale_h])
+		# BOTTLENECK
 		self.cvimage = self.cvtools.cvresize(current_frame, scale)
 		#self.ImageObjects[0].setStream(current_frame)
 		self.SharedData.height, self.SharedData.width, bpc = self.cvimage.shape
+		# OKAY RENDERER
 		self.qimage = QtGui.QImage(self.cvimage.data, self.SharedData.width, self.SharedData.height, bpc * self.SharedData.width, QtGui.QImage.Format_RGB888)
 		self.ImageObjects[0].setImage(self.qimage, self.SharedData.recording, self.SharedData.IsStream, self.config.image_counter)
 

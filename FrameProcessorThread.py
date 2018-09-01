@@ -12,14 +12,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from Models import SharedData, WidgetData, ExporterSharedData
 from OpenCVTools import OpenCVTools
 import concurrent.futures
+import scipy.misc
 
 debug = False
 ocv = OpenCVTools()
 
+@np.vectorize
+def decode_string(f):
+	return np.fromstring(f, dtype=np.uint8)
+
 def decode_image(frame):
-	myframe = np.fromstring(frame, dtype=np.uint8)
-	outputstream = ocv.imdecode(myframe)
-	return outputstream
+	""" SLOW CV2 CONVERT TO SCIPY ARRAY"""
+	myframe = decode_string(frame)
+	RGB = ocv.imdecode(myframe)
+	#RGB = scipy.misc.toimage(frame)
+	return RGB
 
 class FrameProcessor(QtCore.QRunnable):
 	killthread = False
@@ -27,6 +34,8 @@ class FrameProcessor(QtCore.QRunnable):
 		QtCore.QRunnable.__init__(self)
 		super(self.__class__, self).__init__()
 		self.SharedData = SharedData
+
+		# VECT BLANK IMG CREATION
 		self.blank_image = np.zeros((self.SharedData.height,self.SharedData.width,3), np.uint8)
 		self.blank_image[:,0:1*self.SharedData.width] = (0,255,0)      # (B, G, R)
 		self.blank_image[:,1*self.SharedData.width:self.SharedData.width] = (0,255,0)
@@ -48,7 +57,7 @@ class FrameProcessor(QtCore.QRunnable):
 
 	@QtCore.pyqtSlot()
 	def run(self):
-		''' core loop bullshit'''
+		""" Core Loop: Try to vectorize comparator"""
 		while not FrameProcessor.killthread:
 			if self.SharedData.blank_image:
 				self.SharedData.current_frame.emit(self.blank_image)

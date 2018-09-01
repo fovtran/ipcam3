@@ -45,6 +45,7 @@ class ThreadDispatcher(QtCore.QThread):
 				a,b = (self.bytes.find(b'\xff\xd8'), self.bytes.find(b'\xff\xd9'))
 				if a!=-1 and b!=-1:
 					self.SharedData.loopcounter[0] = 0
+					# ANOTHER BOTTLENECK
 					#self.SharedData.framequeue.put(self.bytes[a:b+2])
 					self.SharedData.framequeue.extend([self.bytes[a:b+2]])
 					self.bytes = self.bytes[b+2:]
