@@ -1,0 +1,8 @@
+REM ffmpeg.exe -i .\out.avi -pix_fmt rgb24 -vf scale=300:-1 -gifflags -transdiff -r 7 -s 640x480 -y out.gif
+
+set start_time=0
+set duration=12
+set palette="./palette.png"
+set filters="fps=10,scale=320:-1:flags=lanczos"
+ffmpeg-win64-static\bin\ffmpeg -v warning -ss %start_time% -t %duration% -i output.avi -vf "%filters%,palettegen" -y %palette%
+ffmpeg-win64-static\bin\ffmpeg  -v warning -ss %start_time% -t %duration% -i output.avi -i %palette% -lavfi "%filters% [x]; [x][1:v] paletteuse" -y output2.gif

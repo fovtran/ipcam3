@@ -1,0 +1,7 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+<qresource>
+    <file>thumb.png</file>
+</qresource>
+<qresource prefix="/new/ddddd"/>
+</RCC>
