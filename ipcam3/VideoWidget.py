@@ -184,9 +184,11 @@ class OwnImageWidget(QtWidgets.QWidget):
 		self.WidgetData.recorder_finished.emit()
 
 	def setup(self, SharedData):
+		""" TODO: put flag on VideoRecorder which uses CV2 """
+		
 		self.SharedData = SharedData
-		self.VideoRecorder = VideoRecorder(self.SharedData)
+		#self.VideoRecorder = VideoRecorder(self.SharedData)
 		if self.audio_enabled:
 			self.AudioTask = AudioRecorderThread(self.SharedData)
 			self.WidgetData.audio_finished.connect(self.AudioTask.stop)
-		self.WidgetData.recorder_finished.connect(self.VideoRecorder.Shutdown)
+		#self.WidgetData.recorder_finished.connect(self.VideoRecorder.Shutdown)

@@ -14,7 +14,7 @@ from OpenCVTools import OpenCVTools
 import concurrent.futures
 import scipy.misc
 
-debug = False
+debug = True
 ocv = OpenCVTools()
 
 @np.vectorize
@@ -25,7 +25,7 @@ def decode_image(frame):
 	""" SLOW CV2 CONVERT TO SCIPY ARRAY"""
 	myframe = decode_string(frame)
 	RGB = ocv.imdecode(myframe)
-	#RGB = scipy.misc.toimage(frame)
+	# RGB = scipy.misc.toimage(frame)
 	return RGB
 
 class FrameProcessor(QtCore.QRunnable):

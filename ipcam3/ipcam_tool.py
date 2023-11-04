@@ -150,8 +150,8 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 		self.config.image_counter +=1
 		# USAR NUMPY VECTORIZE
 		img_height, img_width, img_colors = current_frame.shape
-		scale_w = np.float(self.window_width) / np.float(img_width)
-		scale_h = np.float(self.window_height) / np.float(img_height)
+		scale_w = float(self.window_width) / float(img_width)
+		scale_h = float(self.window_height) / float(img_height)
 		scale = np.min([scale_w, scale_h])
 		# BOTTLENECK
 		self.cvimage = self.cvtools.cvresize(current_frame, scale)

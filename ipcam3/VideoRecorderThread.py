@@ -7,12 +7,16 @@ __license__ = "GPL"
 
 import sys, os, time
 import numpy as np
-import cv2
+try:
+	import cv2
+except:
+	print("No CV2 support")
+	CV2=False
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from subprocess import Popen, call, PIPE, STDOUT
 from Models import SharedData, WidgetData, ExporterSharedData
 
-debug = False
+debug = True
 
 class VideoRecorder(QtCore.QObject):
 	def __init__(self, SharedData, parent=None):

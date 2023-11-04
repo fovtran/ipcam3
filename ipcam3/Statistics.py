@@ -10,7 +10,7 @@ import sys, os, platform, time
 from PyQt5 import QtCore, QtGui, QtWidgets, uic
 from Models import SharedData, WidgetData, ExporterSharedData
 
-debug = False
+debug = True
 
 class Statistics(QtCore.QTimer):
 	def __init__(self, SharedData):
