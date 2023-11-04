@@ -41,9 +41,7 @@ void XmlConfigReader::ReadConfigFile(const QString configname)
         }
         filename = application_path.path() + QDir::separator() + configname;
     }
-        
-
-    read();
+    read(); //reads the conf
 }
 
 /* Parses xml configuration file */
@@ -54,7 +52,7 @@ void XmlConfigReader::read()
             {
                 qDebug() << "Error reading xml";
                 xmlFile.close();
-                exit(0);
+                exit(-1);
             }
 
     QXmlStreamReader xml(&xmlFile);
@@ -77,7 +75,5 @@ void XmlConfigReader::read()
     xmlFile.close();
 
     if (xml.hasError())
-    {
         qDebug() << "XML error: " << xml.errorString().data();
-    }
 }
