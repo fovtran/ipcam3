@@ -1,7 +1,2 @@
 build/*
-Makefile
-Makefile.Debug
-Makefile.Release
-.qmake.stash
-qrc_resources.cpp
 

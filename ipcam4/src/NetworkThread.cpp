@@ -18,7 +18,7 @@ NetworkSocket::NetworkSocket(QObject *) : QObject(nullptr), eventLoop(this)
 /* This class just opens a insecure socket shared all across the thread */
 void NetworkSocket::OpenSocket(QString ipaddress, QString url)
 {
-    std::this_thread::sleep_for(1000ms);
+    // std::this_thread::sleep(1000ms);
     if (firstRun)
     {
         firstRun = false;
