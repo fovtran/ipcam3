@@ -5,17 +5,13 @@ from configparser import SafeConfigParser
 
 class config(QtCore.QObject):
 	DEBUGLEVEL = 2
-
 	def __init__(self):
 		# Configuration
 		pass
-
 	def read(self, f):
 		pass
-
 	def write(self, f):
 		pass
-
 class ConfigRead(QtCore.QObject):
 	def __init__(self, cf, parent=None):
 		QtCore.QObject.__init__(self)

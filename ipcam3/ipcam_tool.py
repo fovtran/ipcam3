@@ -20,7 +20,7 @@ from VideoWidget import OwnImageWidget
 from Statistics import Statistics
 from Models import SharedData, WidgetData, ExporterSharedData
 
-form_class = uic.loadUiType("simple.ui")[0]
+form_class = uic.loadUiType("ui/simple.ui")[0]
 
 class MyWindowClass(QtWidgets.QMainWindow, form_class):
 	def __init__(self, myaudiodev, parent=None):
@@ -38,7 +38,7 @@ class MyWindowClass(QtWidgets.QMainWindow, form_class):
 		self.cvtools = OpenCVTools(parent)
 		self.qimage = None
 		self.cvimage = None
-		self.config = ConfigRead('config.ini', parent=parent)
+		self.config = ConfigRead('conf/config.ini', parent=parent)
 		self.config.Reader()
 		self.my_video_source = None
 		self.updating = True

@@ -6,7 +6,7 @@ import os
 
 def getURI():
 	from xml.dom import minidom
-	xmldoc = minidom.parse('config.xml')
+	xmldoc = minidom.parse('conf/config.xml')
 	itemlist = xmldoc.getElementsByTagName('ip')
 	ip = itemlist[0].childNodes[0].data
 	return 'http://' + ip +'/video.cgi?.mjpg'
@@ -24,7 +24,6 @@ class WidgetData(QtCore.QObject):
 	full_image_path = None
 	filename = None
 	counter = 0
-
 	def __init__(self, parent=None):
 		QtCore.QObject.__init__(self)
 		super(self.__class__, self).__init__()
